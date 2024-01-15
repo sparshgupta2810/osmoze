@@ -7,6 +7,7 @@ import {
   GoogleAuthProvider,
 } from "firebase/auth";
 import auth from "../firebase";
+import 'firebase/firestore';
 
 
 const AuthContext = createContext();
@@ -22,13 +23,6 @@ export const AuthContextProvider = ({ children }) => {
   const logOut = () => {
     signOut(auth);
   };
-
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
-    return () => unsubscribe();
-  }, [user]);
 
   return (
     <AuthContext.Provider value={{ user, googleSignIn, logOut }}>
