@@ -10,34 +10,33 @@ import {
   doc,
 } from "firebase/firestore";
 
-const userInfoRef = collection(db, "user");
-class UserDataService  {
+const userInfoRef = collection(db, "users");
+class UserDataService {
+  //add
+  addUser = (newUser) => {
+    return addDoc(userInfoRef, newUser);
+  };
 
-    //add
-    addUser = (newUser) => {
-      return addDoc(userInfoRef, newUser);
-    };
-  
-    //upadte
-    updateUser = (id, updatedUser) => {
-      const userDoc = doc(db, "user", id);
-      return updateDoc(userDoc, updatedUser);
-    };
-  
-    //delete
-    deleteUser = (id) => {
-      const userDoc = doc(db, "user", id);
-      return deleteDoc(userDoc);
-    };
-  
-    getAllUser = () => {
-      return getDocs(userInfoRef);
-    };
-  
-    getUser = (id) => {
-      const userDoc = doc(db, "user", id);
-      return getDoc(userDoc);
-    };
-  }
-  
-  export default new UserDataService();
+  //upadte
+  updateUser = (id, updatedUser) => {
+    const userDoc = doc(db, "users", id);
+    return updateDoc(userDoc, updatedUser);
+  };
+
+  //delete
+  deleteUser = (id) => {
+    const userDoc = doc(db, "users", id);
+    return deleteDoc(userDoc);
+  };
+
+  getAllUser = () => {
+    return getDocs(userInfoRef);
+  };
+
+  getUser = (id) => {
+    const userDoc = doc(db, "users", id);
+    return getDoc(userDoc);
+  };
+}
+
+export default new UserDataService();
